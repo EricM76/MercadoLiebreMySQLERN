@@ -4,13 +4,18 @@
   "private": true,
   "scripts": {
     "start": "node ./src/bin/www",
-    "dev": "nodemon ./src/bin/www",
+    "client:start": "cd client && npm start",
+    "client:build": "cd client && npm run build",
+    "server": "nodemon ./src/bin/www",
+    "dev": "concurrently \"npm run server\" \"npm run client:start\" ",
     "create:db": "sequelize db:create && sequelize db:migrate && sequelize db:seed:all",
     "reset:db": "sequelize db:drop && npm run create:db",
-    "dev:reset":"npm run reset:db && nodemon ./src/bin/www"
+    "dev:reset": "npm run reset:db && nodemon ./src/bin/www"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "concurrently": "^7.6.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.2",
     "express": "~4.16.1",
     "jsonwebtoken": "^8.5.1",
