@@ -3,11 +3,14 @@ require("dotenv").config();
 const express = require("express");
 const logger = require("morgan");
 const app = express();
+const cors = require('cors');
 
 /* Middleware */
 app.use(express.urlencoded({ extended: false }));
 app.use(logger("dev"));
 app.use(express.json());
+app.use(cors());
+app.use(express.static('public'))
 
 /* Routers */
 const productsRouter = require("./routes/products");
@@ -16,6 +19,7 @@ const usersRouter = require("./routes/users");
 const { sendJsonError } = require("./helpers/sendJsonError");
 
 /* Routes */
+app.get('/',(req,res) => res.sendFile('/index.html'))
 app.use("/products", productsRouter);
 app.use("/auth", authRouter);
 app.use("/users", usersRouter);

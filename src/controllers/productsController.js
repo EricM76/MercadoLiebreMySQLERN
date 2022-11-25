@@ -198,15 +198,14 @@ const controller = {
 
       return res.status(200).json({
         meta: {
-          ok: true,
           status: 200,
         },
-        data: {
-          totalProducts: count,
-          prev: urlPrev,
-          next: urlNext,
-          products,
-        },
+        ok: true,
+        totalProducts: count,
+        prev: urlPrev,
+        next: urlNext,
+        data: products,
+        error : null
       });
     } catch (error) {
       sendJsonError(error, res);
